@@ -147,11 +147,9 @@ _forktest: forktest.o $(ULIB)
 	$(LD) $(LDFLAGS) -N -e main -Ttext 0 -o _forktest forktest.o ulib.o usys.o
 	$(OBJDUMP) -S _forktest > forktest.asm
 
-syscall_rs.o: syscall_rs.rs
-	rustc -O $< --emit obj --crate-type lib --target i686-unknown-linux-gnu
-
 %.o: %.rs
-	rustc -O $< --emit obj --target i686-unknown-linux-gnu
+	rustc $< --emit obj --target i686-unknown-linux-gnu -Ctarget-cpu=generic
+	#TODO: -C relocation-model=static -C no-stack-check
 
 
 mkfs: mkfs.c fs.h

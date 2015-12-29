@@ -1,9 +1,11 @@
-extern {
-    fn printf(fd: isize, fmt: *const u8, ...) -> ();
+mod ffi {
+    extern {
+        pub fn printf(fd: i32, fmt: *const u8, ...) -> ();
+    }
 }
 
-pub fn printf_rs(fd: isize, fmt: &str) -> () {
+pub fn printf(fd: isize, fmt: &str, values: &[*const u8]) -> () {
     unsafe {
-        printf(fd,fmt.as_ptr());
+        ffi::printf(fd as i32,fmt.as_ptr(),47 as u32);
     }
 }

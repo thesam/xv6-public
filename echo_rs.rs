@@ -16,9 +16,25 @@
 mod syscall_rs;
 mod ulib_rs;
 
+use std::slice;
+
 #[start]
 fn start(_argc: isize, _argv: *const *const u8) -> isize {
-    ulib_rs::printf_rs(1,"Hello world!\0");
-    syscall_rs::exit_rs();
+    let ints:&[*const u8] = &[&0];
+    ulib_rs::printf(1,"%d",&ints);
+    // unsafe {
+    //     let argv:&[*const u8] = slice::from_raw_parts(_argv,_argc as usize);
+    //     for (i,arg) in argv.iter().enumerate() {
+    //         let next = if (i+1 < _argc as usize) {
+    //             " "
+    //         } else {
+    //             "\n"
+    //         };
+    //         let values:[*const u8;2] = [*arg,next.as_ptr()];
+    //         ulib_rs::printf(1,"arg",&values);
+    //         ulib_rs::printf(1,"%s%s",&values);
+    //     }
+    // };
+    syscall_rs::exit();
     0
 }
