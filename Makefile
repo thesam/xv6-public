@@ -147,8 +147,12 @@ _forktest: forktest.o $(ULIB)
 	$(LD) $(LDFLAGS) -N -e main -Ttext 0 -o _forktest forktest.o ulib.o usys.o
 	$(OBJDUMP) -S _forktest > forktest.asm
 
-hello.o: hello.rs
-	rustc -O hello.rs --emit obj --target i686-unknown-linux-gnu
+syscall_rs.o: syscall_rs.rs
+	rustc -O $< --emit obj --crate-type lib --target i686-unknown-linux-gnu
+
+%.o: %.rs
+	rustc -O $< --emit obj --target i686-unknown-linux-gnu
+
 
 mkfs: mkfs.c fs.h
 	gcc -Werror -Wall -o mkfs mkfs.c
@@ -162,6 +166,7 @@ mkfs: mkfs.c fs.h
 UPROGS=\
 	_cat\
 	_echo\
+	_echo_rs\
 	_forktest\
 	_grep\
 	_init\

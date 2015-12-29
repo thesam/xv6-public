@@ -1,11 +1,9 @@
 #![feature(start)]
 
-extern {
-    fn exit()->();
-}
+mod syscall_rs;
 
 #[start]
 fn start(_argc: isize, _argv: *const *const u8) -> isize {
-    unsafe { exit(); }
+    syscall_rs::exit_rs();
     0
 }
