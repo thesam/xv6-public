@@ -148,7 +148,7 @@ _forktest: forktest.o $(ULIB)
 	$(OBJDUMP) -S _forktest > forktest.asm
 
 %.o: %.rs
-	rustc $< --emit obj --target i686-unknown-linux-gnu -Ctarget-cpu=generic
+	rustc $< -O --emit obj --target i686-unknown-linux-gnu -Ctarget-cpu=generic
 	#TODO: -C relocation-model=static -C no-stack-check
 
 

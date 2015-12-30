@@ -1,9 +1,8 @@
-mod ffi {
-    extern {
-        pub fn exit()->();
-    }
+extern {
+    #[link_name="exit"]
+    pub fn c_exit()->();
 }
 
 pub fn exit() -> () {
-    unsafe {ffi::exit()}
+    unsafe {c_exit()}
 }
