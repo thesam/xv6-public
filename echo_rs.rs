@@ -21,16 +21,15 @@ use std::slice;
 #[start]
 fn start(_argc: isize, _argv: *const *const u8) -> isize {
     unsafe {
-        ulib_rs::printf(1,"echo".as_ptr());
         let argv:&[*const u8] = slice::from_raw_parts(_argv,_argc as usize);
         for (i,arg) in argv.iter().enumerate() {
             if i > 0 {
                 let next:*const u8 = if (i+1 < _argc as usize) {
-                    " "
+                    " \0"
                 } else {
-                    "\n"
+                    "\n\0"
                 }.as_ptr();
-                ulib_rs::printf(1,"%s%s".as_ptr(),*arg,next);
+                ulib_rs::printf(1,"%s%s\0".as_ptr(),*arg,next);
             }
         }
     };
