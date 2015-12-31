@@ -170,6 +170,7 @@ UPROGS=\
 	_init\
 	_kill\
 	_ln\
+	_ln_rs\
 	_ls\
 	_mkdir\
 	_mkdir_rs\
