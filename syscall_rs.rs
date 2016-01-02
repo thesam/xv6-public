@@ -10,6 +10,18 @@ extern {
 
     #[link_name="kill"]
     pub fn c_kill(pid: isize) -> isize;
+
+    #[link_name="open"]
+    pub fn c_open(file: *const u8, mode: isize) -> isize;
+
+    #[link_name="close"]
+    pub fn c_close(fd: isize) -> isize;
+
+    #[link_name="read"]
+    pub fn c_read(fd: isize, buf:*const u8, length: isize) -> isize;
+
+    #[link_name="write"]
+    pub fn c_write(fd: isize, buf:*const u8, length: isize) -> isize;
 }
 
 pub fn exit() -> () {
@@ -26,4 +38,20 @@ pub fn link(old:*const u8, new:*const u8) -> isize {
 
 pub fn kill(pid: isize) -> isize {
     unsafe {c_kill(pid)}
+}
+
+pub fn open(file: *const u8, mode: isize) -> isize {
+    unsafe {c_open(file,mode)}
+}
+
+pub fn close(fd: isize) -> isize {
+    unsafe {c_close(fd)}
+}
+
+pub fn read(fd: isize, buf: *const u8, length: isize) -> isize {
+    unsafe {c_read(fd,buf,length)}
+}
+
+pub fn write(fd: isize, buf: *const u8, length: isize) -> isize {
+    unsafe {c_write(fd,buf,length)}
 }
