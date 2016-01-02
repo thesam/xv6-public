@@ -169,6 +169,7 @@ UPROGS=\
 	_grep\
 	_init\
 	_kill\
+	_kill_rs\
 	_ln\
 	_ln_rs\
 	_ls\
