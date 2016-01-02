@@ -22,6 +22,12 @@ extern {
 
     #[link_name="write"]
     pub fn c_write(fd: isize, buf:*const u8, length: isize) -> isize;
+
+    #[link_name="fork"]
+    pub fn c_fork() -> isize;
+
+    #[link_name="sleep"]
+    pub fn c_sleep(duration: isize) -> isize;
 }
 
 pub fn exit() -> () {
@@ -54,4 +60,12 @@ pub fn read(fd: isize, buf: *const u8, length: isize) -> isize {
 
 pub fn write(fd: isize, buf: *const u8, length: isize) -> isize {
     unsafe {c_write(fd,buf,length)}
+}
+
+pub fn fork() -> isize {
+    unsafe {c_fork()}
+}
+
+pub fn sleep(duration: isize) -> isize {
+    unsafe {c_sleep(duration)}
 }
