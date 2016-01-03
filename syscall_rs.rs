@@ -28,6 +28,9 @@ extern {
 
     #[link_name="sleep"]
     pub fn c_sleep(duration: isize) -> isize;
+
+    #[link_name="unlink"]
+    pub fn c_unlink(file: *const u8) -> isize;
 }
 
 pub fn exit() -> () {
@@ -68,4 +71,8 @@ pub fn fork() -> isize {
 
 pub fn sleep(duration: isize) -> isize {
     unsafe {c_sleep(duration)}
+}
+
+pub fn unlink(file: *const u8) -> isize {
+    unsafe {c_unlink(file)}
 }
