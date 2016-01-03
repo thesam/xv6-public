@@ -167,6 +167,7 @@ UPROGS=\
 	_echo\
 	_echo_rs\
 	_forktest\
+	_forktest_rs\
 	_grep\
 	_init\
 	_kill\
@@ -176,6 +177,7 @@ UPROGS=\
 	_ls\
 	_mkdir\
 	_mkdir_rs\
+	_rm\
 	_rm_rs\
 	_sh\
 	_stressfs\

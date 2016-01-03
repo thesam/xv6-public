@@ -31,6 +31,9 @@ extern {
 
     #[link_name="unlink"]
     pub fn c_unlink(file: *const u8) -> isize;
+
+    #[link_name="wait"]
+    pub fn c_wait() -> isize;
 }
 
 pub fn exit() -> () {
@@ -75,4 +78,8 @@ pub fn sleep(duration: isize) -> isize {
 
 pub fn unlink(file: *const u8) -> isize {
     unsafe {c_unlink(file)}
+}
+
+pub fn wait() -> isize {
+    unsafe {c_wait()}
 }
