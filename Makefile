@@ -170,6 +170,7 @@ UPROGS=\
 	_forktest_rs\
 	_grep\
 	_init\
+	_init_rs\
 	_kill\
 	_kill_rs\
 	_ln\

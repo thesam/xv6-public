@@ -34,6 +34,15 @@ extern {
 
     #[link_name="wait"]
     pub fn c_wait() -> isize;
+
+    #[link_name="dup"]
+    pub fn c_dup(fd: isize) -> isize;
+
+    #[link_name="mknod"]
+    pub fn c_mknod(path: *const u8, major: isize, minor: isize) -> isize;
+
+    #[link_name="exec"]
+    pub fn c_exec(path: *const u8, argv: *const *const u8) -> isize;
 }
 
 pub fn exit() -> () {
@@ -82,4 +91,16 @@ pub fn unlink(file: *const u8) -> isize {
 
 pub fn wait() -> isize {
     unsafe {c_wait()}
+}
+
+pub fn dup(fd: isize) -> isize {
+    unsafe {c_dup(fd)}
+}
+
+pub fn mknod(path: *const u8, major: isize, minor: isize) -> isize {
+    unsafe {c_mknod(path,major,minor)}
+}
+
+pub fn exec(path: *const u8, argv: *const *const u8) -> isize {
+    unsafe {c_exec(path,argv)}
 }
