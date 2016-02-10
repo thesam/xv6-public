@@ -176,6 +176,7 @@ UPROGS=\
 	_stressfs\
 	_usertests\
 	_wc\
+	_wc_rs\
 	_zombie_rs\
 
 fs.img: mkfs README $(UPROGS)
