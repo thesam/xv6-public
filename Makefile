@@ -162,29 +162,20 @@ mkfs: mkfs.c fs.h
 .PRECIOUS: %.o
 
 UPROGS=\
-	_cat\
 	_cat_rs\
-	_echo\
 	_echo_rs\
-	_forktest\
 	_forktest_rs\
 	_grep\
-	_init\
 	_init_rs\
-	_kill\
 	_kill_rs\
-	_ln\
 	_ln_rs\
 	_ls\
-	_mkdir\
 	_mkdir_rs\
-	_rm\
 	_rm_rs\
 	_sh\
 	_stressfs\
 	_usertests\
 	_wc\
-	_zombie\
 	_zombie_rs\
 
 fs.img: mkfs README $(UPROGS)
