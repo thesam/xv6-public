@@ -147,8 +147,9 @@ _forktest: forktest.o $(ULIB)
 	$(LD) $(LDFLAGS) -N -e main -Ttext 0 -o _forktest forktest.o ulib.o usys.o
 	$(OBJDUMP) -S _forktest > forktest.asm
 
+#TODO: Split lib code and userspace apps (without --crate-type lib)
 %.o: %.rs
-	rustc $< -O --emit obj --target i686-unknown-linux-gnu -Ctarget-cpu=generic
+	rustc $< -O --emit obj --target i686-unknown-linux-gnu -Ctarget-cpu=generic --crate-type lib
 	#TODO: -C relocation-model=static -C no-stack-check
 
 
