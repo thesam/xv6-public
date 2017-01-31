@@ -9,8 +9,8 @@
 #![feature(asm)]
 
 mod traps;
-mod x86;
 mod picirq;
+mod x86;
 
 use traps::IRQ_TIMER;
 

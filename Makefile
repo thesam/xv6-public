@@ -148,8 +148,20 @@ _forktest: forktest.o $(ULIB)
 	$(OBJDUMP) -S _forktest > forktest.asm
 
 #TODO: Split lib code and userspace apps (without --crate-type lib)
-%.o: %.rs
+timer.o: timer.rs picirq.o
 	rustc $< -O --emit obj --target i686-unknown-linux-gnu -Ctarget-cpu=generic --crate-type lib
+	#TODO: -C relocation-model=static -C no-stack-check
+
+picirq.o: picirq.rs x86.o
+		rustc $< -O --emit obj --target i686-unknown-linux-gnu -Ctarget-cpu=generic --crate-type lib
+		#TODO: -C relocation-model=static -C no-stack-check
+
+x86.o: x86.rs
+		rustc $< -O --emit obj --target i686-unknown-linux-gnu -Ctarget-cpu=generic --crate-type lib
+		#TODO: -C relocation-model=static -C no-stack-check
+
+%.o: %.rs
+	rustc $< -O --emit obj --target i686-unknown-linux-gnu -Ctarget-cpu=generic
 	#TODO: -C relocation-model=static -C no-stack-check
 
 

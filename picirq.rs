@@ -1,7 +1,8 @@
 #![feature(asm)]
 
-mod x86;
-mod traps;
+#![no_std]
+use x86;
+use traps;
 
 use traps::T_IRQ0;
 
