@@ -1,8 +1,8 @@
 #![feature(asm)]
 
 #![no_std]
-use x86;
-use traps;
+extern crate x86;
+extern crate traps;
 
 use traps::T_IRQ0;
 

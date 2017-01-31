@@ -1,5 +1,4 @@
 #![feature(asm)]
-#![no_std]
 
 pub fn out8(port:u16, value:u8) {
     unsafe {
