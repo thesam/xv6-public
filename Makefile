@@ -148,19 +148,19 @@ _forktest: forktest.o $(ULIB)
 	$(OBJDUMP) -S _forktest > forktest.asm
 
 #TODO: Split lib code and userspace apps (without --crate-type lib)
-timer.o: timer.rs picirq.o
-	rustc $< -O --emit obj --target i686-unknown-linux-gnu -Ctarget-cpu=generic --crate-type lib -L . -l x86
+timer.o: timer.rs picirq_rs.o
+	rustc $< -O --emit obj --target i686-unknown-linux-gnu -Ctarget-cpu=generic --crate-type lib -L . -l x86_rs
 	#TODO: -C relocation-model=static -C no-stack-check
 
-picirq.o: picirq.rs x86.o traps.o
-		rustc $< -O --emit obj --target i686-unknown-linux-gnu -Ctarget-cpu=generic --crate-type lib -L . -l x86 -l traps
+picirq_rs.o: picirq_rs.rs x86_rs.o traps_rs.o
+		rustc $< -O --emit obj --target i686-unknown-linux-gnu -Ctarget-cpu=generic --crate-type lib -L . -l x86 -l traps_rs
 		#TODO: -C relocation-model=static -C no-stack-check
 
-x86.o: x86.rs
+x86_rs.o: x86_rs.rs
 		rustc $< -O --target i686-unknown-linux-gnu -Ctarget-cpu=generic --crate-type lib
 		#TODO: -C relocation-model=static -C no-stack-check
 
-traps.o: traps.rs
+traps_rs.o: traps_rs.rs
 		rustc $< -O --target i686-unknown-linux-gnu -Ctarget-cpu=generic --crate-type lib
 		#TODO: -C relocation-model=static -C no-stack-check
 
@@ -206,6 +206,7 @@ clean:
 	*.o *.d *.asm *.sym vectors.S bootblock entryother \
 	initcode initcode.out kernel xv6.img fs.img kernelmemfs mkfs \
 	.gdbinit \
+	*.rlib \
 	$(UPROGS)
 
 # make a printout

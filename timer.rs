@@ -8,11 +8,11 @@
 // #include "x86.h"
 #![feature(asm)]
 
-mod traps;
-mod picirq;
-mod x86;
+mod traps_rs;
+mod picirq_rs;
+mod x86_rs;
 
-use traps::IRQ_TIMER;
+use traps_rs::IRQ_TIMER;
 
 const IO_TIMER1:u16 = 0x040;           // 8253 Timer #1
 
@@ -30,10 +30,10 @@ const TIMER_16BIT:u8 = 0x30;    // r/w counter 16 bits, LSB first
 #[no_mangle]
 pub extern fn timerinit() -> () {
       // Interrupt 100 times/sec.
-      x86::out8(TIMER_MODE, TIMER_SEL0 | TIMER_RATEGEN | TIMER_16BIT);
-      x86::out8(IO_TIMER1, (timer_div(100) % 256) as u8);
-      x86::out8(IO_TIMER1, (timer_div(100) / 256) as u8);
-      picirq::picenable(IRQ_TIMER);
+      x86_rs::out8(TIMER_MODE, TIMER_SEL0 | TIMER_RATEGEN | TIMER_16BIT);
+      x86_rs::out8(IO_TIMER1, (timer_div(100) % 256) as u8);
+      x86_rs::out8(IO_TIMER1, (timer_div(100) / 256) as u8);
+      picirq_rs::picenable(IRQ_TIMER);
 }
 
 fn timer_div(x:u32) -> u32 {

@@ -1,6 +1,7 @@
 #![feature(asm)]
 
-pub fn out8(port:u16, value:u8) {
+#[no_mangle]
+pub extern fn out8(port:u16, value:u8) {
     unsafe {
         asm!(
         "out $0,$1"
