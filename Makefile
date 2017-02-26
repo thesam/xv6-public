@@ -12,7 +12,7 @@ OBJS = \
 	log.o\
 	main.o\
 	mp.o\
-	picirq.o\
+	picirq_rs.o\
 	pipe.o\
 	proc.o\
 	spinlock.o\
@@ -27,6 +27,7 @@ OBJS = \
 	uart.o\
 	vectors.o\
 	vm.o\
+	x86_rs.o\
 
 # Cross-compiling (e.g., on Mac OS X)
 # TOOLPREFIX = i386-jos-elf
@@ -153,11 +154,12 @@ timer.o: timer.rs picirq_rs.o
 	#TODO: -C relocation-model=static -C no-stack-check
 
 picirq_rs.o: picirq_rs.rs x86_rs.o traps_rs.o
-		rustc $< -O --emit obj --target i686-unknown-linux-gnu -Ctarget-cpu=generic --crate-type lib -L . -l x86 -l traps_rs
+		rustc $< -O --emit obj --target i686-unknown-linux-gnu -Ctarget-cpu=generic --crate-type lib -L . -l x86_rs -l traps_rs
 		#TODO: -C relocation-model=static -C no-stack-check
 
 x86_rs.o: x86_rs.rs
 		rustc $< -O --target i686-unknown-linux-gnu -Ctarget-cpu=generic --crate-type lib
+		rustc $< -O --emit obj --target i686-unknown-linux-gnu -Ctarget-cpu=generic --crate-type lib
 		#TODO: -C relocation-model=static -C no-stack-check
 
 traps_rs.o: traps_rs.rs
